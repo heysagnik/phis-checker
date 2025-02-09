@@ -217,17 +217,24 @@ function calculateOverallRisk({ safeBrowsingScore, geminiScore, domainRisk, cont
   return Math.round(overallRiskScore);
 }
 
-function generateSummary(overallRiskScore, geminiCategory) {
-  const isReallySafe = overallRiskScore < 50;
+function getThreatLevel(score) {
+  if (score >= 75) return 'Critical';
+  if (score >= 60) return 'High';
+  if (score >= 40) return 'Medium';
+  return 'Low';
+}
+
+function generateSummary(overallRiskScore) {
+  const isReallySafe = overallRiskScore < 30;
+  const threatLevel = getThreatLevel(overallRiskScore);
   return {
+    threatLevel,
     message: isReallySafe 
-             ? 'This URL appears to be safe.' 
+             ? `This URL appears to be safe (Threat Level: ${threatLevel}).` 
              : `Warning: This URL may be unsafe. Risk Score: ${overallRiskScore}`,
-    category: geminiCategory,
     isReallySafe
   };
 }
-
 /* --- End Scoring Functions --- */
 
 app.get('/api/check', async (req, res) => {
