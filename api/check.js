@@ -225,7 +225,7 @@ function getThreatLevel(score) {
 }
 
 function generateSummary(overallRiskScore) {
-  const isReallySafe = overallRiskScore < 30;
+  const isReallySafe = overallRiskScore < 50;
   const threatLevel = getThreatLevel(overallRiskScore);
   return {
     threatLevel,
