@@ -230,8 +230,8 @@ function generateSummary(overallRiskScore) {
   return {
     threatLevel,
     message: isReallySafe 
-             ? `This URL appears to be safe (Threat Level: ${threatLevel}).` 
-             : `Warning: This URL may be unsafe. Risk Score: ${overallRiskScore}`,
+             ? `This URL appears to be safe` 
+             : `Warning: This URL may be unsafe.`,
     isReallySafe
   };
 }
